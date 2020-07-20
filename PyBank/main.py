@@ -31,8 +31,8 @@ print(f"Average Change: ${round(average, 2)}")
 print(f"Greatest Increase in Profits: ${greatest_increase}")
 print(f"Greatest Decrease in Profits: ${greatest_decrease}")
 
-output = os.path.join("budget_data" "budget_analysis.txt")
-with open ("output", "w") as text_file:
+output_file = os.path.join("PyBank","Resources" "budget_analysis.text")
+with open ("output_file", "w") as text_file:
     text_file.write(output)
 
     text_file.write("Financial Analysis\n")
