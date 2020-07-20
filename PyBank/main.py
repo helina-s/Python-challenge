@@ -19,9 +19,6 @@ with open(csvpath) as csvfile:
     average = total/total_months
     greatest_increase = max(int(row["Profit/Losses"]) for row in rows)
     greatest_decrease = min(int(row["Profit/Losses"]) for row in rows)
-
-    total_months += 1
-    month_of_change += [row[0]]
   
 print("Financial Analysis")
 print("--------------------------")
@@ -33,7 +30,7 @@ print(f"Greatest Decrease in Profits: ${greatest_decrease}")
 
 output_file = os.path.join("PyBank","Resources" "budget_analysis.text")
 with open ("output_file", "w") as text_file:
-    text_file.write(output)
+    text_file.write(output_file)
 
     text_file.write("Financial Analysis\n")
     text_file.write("--------------------------\n")
@@ -41,4 +38,4 @@ with open ("output_file", "w") as text_file:
     text_file.write(f"Total: ${total}\n")
     text_file.write(f"Average Change: ${round(average, 2)}\n")
     text_file.write(f"Greatest Increase in Profits: ${greatest_increase}\n")
-    text_file.write(f"Greatest Decrease in Profits: ${greatest_decrease})
+    text_file.write(f"Greatest Decrease in Profits: ${greatest_decrease}")
