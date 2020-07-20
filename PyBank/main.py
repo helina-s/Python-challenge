@@ -41,4 +41,4 @@ with open ("output", "w") as text_file:
     text_file.write(f"Total: ${total}\n")
     text_file.write(f"Average Change: ${round(average, 2)}\n")
     text_file.write(f"Greatest Increase in Profits: ${greatest_increase}\n")
-    (f"Greatest Decrease in Profits: ${greatest_decrease}\n")
+    text_file.write(f"Greatest Decrease in Profits: ${greatest_decrease})
