@@ -28,6 +28,13 @@ print(f"Average Change: ${round(average, 2)}")
 print(f"Greatest Increase in Profits: ${greatest_increase}")
 print(f"Greatest Decrease in Profits: ${greatest_decrease}")
 
+output_path = os.path.join("..", "output", "new.csv")
 
-
-    
+with open("mainpy.txt", "w") as pyfile:
+    pyfile.write("Financial Analysis")
+    pyfile.write("--------------------------")
+    pyfile.write(f"Total Months: {total_months}")
+    pyfile.write(f"Total: ${total}")
+    pyfile.write(f"Average Change: ${round(average, 2)}")
+    pyfile.write(f"Greatest Increase in Profits: ${greatest_increase}")
+    (f"Greatest Decrease in Profits: ${greatest_decrease}")

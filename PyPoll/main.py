@@ -8,5 +8,17 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
 
     total_votes = len(list(csvreader))
-    print(total_votes)
-    
+    #print(total_votes)
+
+with open(csvpath) as csvfile:
+    reader = csv.DictReader(csvfile)
+    rows = list(reader)
+
+    #voter_ID= row[0]
+    #county = row[1]
+    #candidate = row[2]
+    candidate_list = []
+    for candidates in rows:
+        if candidates not in candidate_list:
+            candidate_list.append(candidates)
+        print(candidate_list)
