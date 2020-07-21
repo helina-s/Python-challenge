@@ -6,12 +6,13 @@ csvpath = os.path.join("/Users/Munit/Repository/gwu-arl-data-pt-06-2020-u-c/02-H
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvfile)
-   
+
 total_vote=0
 array_len=0
 candidates_list=[]
 total_candidate_vote=[]
 candidate_name=0
+candidate_vote = 0
 
 with open (csvpath) as csvfile:
     csvreader=csv.reader(csvfile)
