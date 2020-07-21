@@ -10,7 +10,7 @@ with open(csvpath) as csvfile:
 #skip the header (first row)
     csv_header = next(csvreader)
 #total number of months
-    total_months = len(list(csvreader))
+    total_months = len(list(csvreader)
     
 with open(csvpath) as csvfile:
     reader = csv.DictReader(csvfile)
@@ -30,7 +30,6 @@ print(f"Greatest Decrease in Profits: ${greatest_decrease}")
 
 output_file = os.path.join("PyBank","Resources" "budget_analysis.text")
 with open ("output_file", "w") as text_file:
-    text_file.write(output_file)
 
     text_file.write("Financial Analysis\n")
     text_file.write("--------------------------\n")
