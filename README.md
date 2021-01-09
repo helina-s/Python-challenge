@@ -23,3 +23,4 @@ I was able to create a Python script that analyzes the votes and calculates each
   * The total number of votes each candidate won
   * The winner of the election based on popular vote.
  
+ The results can be found in the output file.
