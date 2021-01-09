@@ -1,40 +1,38 @@
 #import required modules
-import csv
 import os
+import csv
 
-csvpath = os.path.join("/Users/Munit/Repository/gwu-arl-data-pt-06-2020-u-c/02-Homework/03-Python/Instructions/PyBank/Resources/budget_data.csv")
-#open CSV files
+#create lists to append to
+total_months = []
+net_profit = []
+profit_change = []
+
+csvpath = os.path.join('PyBank/Resources/budget_data.csv')
 with open(csvpath) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    #print(csvreader)
-#skip the header (first row)
-    csv_header = next(csvreader)
-#total number of months
-    total_months = len(list(csvreader)
+    csvreader = csv.reader(csvfile, delimiter=",")  
+    header = next(csvreader)
     
-with open(csvpath) as csvfile:
-    reader = csv.DictReader(csvfile)
-    rows = list(reader)
-    total = sum(float(row["Profit/Losses"]) for row in rows)
-    average = total/total_months
-    greatest_increase = max(int(row["Profit/Losses"]) for row in rows)
-    greatest_decrease = min(int(row["Profit/Losses"]) for row in rows)
-  
+    #iterate values to add to list
+    for row in csvreader:
+        total_months.append(row[0])
+        net_profit.append(int(row[1]))
+        
+    for i in range(len(net_profit)-1):
+        profit_change.append(net_profit[i+1]-net_profit[i])
+
+# review min and max values
+increase = max(profit_change)
+decrease = min(profit_change)
+
+# check index
+monthly_increase = profit_change.index(max(profit_change))+1
+monthly_decrease = profit_change.index(min(profit_change))+1
+
+# print results
 print("Financial Analysis")
-print("--------------------------")
-print(f"Total Months: {total_months}")
-print(f"Total: ${total}")
-print(f"Average Change: ${round(average, 2)}")
-print(f"Greatest Increase in Profits: ${greatest_increase}")
-print(f"Greatest Decrease in Profits: ${greatest_decrease}")
-
-output_file = os.path.join("PyBank","Resources" "budget_analysis.text")
-with open ("output_file", "w") as text_file:
-
-    text_file.write("Financial Analysis\n")
-    text_file.write("--------------------------\n")
-    text_file.write(f"Total Months: {total_months}\n")
-    text_file.write(f"Total: ${total}\n")
-    text_file.write(f"Average Change: ${round(average, 2)}\n")
-    text_file.write(f"Greatest Increase in Profits: ${greatest_increase}\n")
-    text_file.write(f"Greatest Decrease in Profits: ${greatest_decrease}")
+print("-------------------")
+print(f"Total Months:{len(total_months)}")
+print(f"Total: ${sum(net_profit)}")
+print(f"Average Change:{round(sum(profit_change)/len(profit_change),2)}")
+print(f"Greatest Increase in Profits: {total_months[monthly_increase]} (${(str(increase))})")
+print(f"Greatest Decrease in Profits: {total_months[monthly_decrease]} (${(str(decrease))})")
