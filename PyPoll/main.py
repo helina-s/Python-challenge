@@ -1,38 +1,68 @@
-#import required modules
+# import required modules
 import csv
 import os
-csvpath = os.path.join("/Users/Munit/Repository/gwu-arl-data-pt-06-2020-u-c/02-Homework/03-Python/Instructions/PyPoll/Resources/election_data.csv")
 
+#create lists for calculations
+total_votes = 0
+candidates = []
+vote_counts = []
+
+csvpath = os.path.join('PyPoll/Resources/election_data.csv')
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
-    csv_header = next(csvfile)
-
-total_vote=0
-array_len=0
-candidates_list=[]
-total_candidate_vote=[]
-candidate_name=0
-candidate_vote = 0
-
-with open (csvpath) as csvfile:
-    csvreader=csv.reader(csvfile)
-    csv_header = next(csvreader)
+    header = next(csvreader)
     
+    #iterate through data
     for row in csvreader:
-        total_votes += 1
-        candidates_list.append(str(row[2]))
-        array_len=len(candidates_list)
-        
-for votes in range(0,array_len):
-    with open (csvpath) as csvfile:
-        csvreader=csv.reader(csvfile)
-        csv_header = next(csvfile)
-        total_vote=0
-        for row in csvreader:
-            if row[2]==candidates_list[votes]:
-                total_vote = total_votes + int(row[0])
-                total_candidate_vote.append(total_vote)
+        total_votes = total_votes + 1
 
-for votes in range(0,array_len):
-    candidate_vote[0].append(candidates_list[votes])
-    candidate_vote[1].append(total_candidate_vote [votes])
+        #the candidate voted for
+        candidate = row[2]
+
+        #if the candidate has other votes then add to total vote
+        if candidate in candidates:
+            candidate_index = candidates.index(candidate)
+            vote_counts[candidate_index] = vote_counts[candidate_index] + 1
+        #else create new spot in list for candidate
+        else:
+            candidates.append(candidate)
+            vote_counts.append(1)
+
+    # create list for calculations
+    percentages = []
+    max_votes = vote_counts[0]
+    max_index = 0
+
+    #compute percentage of vote for each candidate and the winner
+    for count in range(len(candidates)):
+        vote_percentage = vote_counts[count]/total_votes*100
+        percentages.append(vote_percentage)
+        if vote_counts[count] > max_votes:
+            max_votes = vote_counts[count]
+            print(max_votes)
+            max_index = count
+    winner = candidates[max_index]
+
+#print results
+print("Election Results")
+print("--------------------------")
+print(f"Total Votes: {total_votes}")
+
+#round percentages
+percentages = [round(i,2) for i in percentages]
+
+for count in range(len(candidates)):
+    print(f"{candidates[count]}: {percentages[count]}% ({vote_counts[count]})")
+    print("---------------------------")
+print(f"Winner: {winner}")
+
+#export results to a text file
+output_file = os.path.join("PyPoll","pypoll_output.txt")
+output = open(output_file,"w")
+output.write("Election Results")
+output.write("\n--------------------------")
+output.write(f"\nTotal Votes: {total_votes}")
+for count in range(len(candidates)):
+    output.write(f"\n{candidates[count]}: {percentages[count]}% ({vote_counts[count]})")
+output.write("\n---------------------------")
+output.write(f"\nWinner: {winner}")
